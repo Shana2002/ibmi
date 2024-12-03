@@ -3,28 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:ibmi/widget/info_card.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class History extends StatefulWidget {
+class History extends StatelessWidget {
   History({super.key});
-
-  @override
-  State<History> createState() => _HistoryState();
-}
-
-class _HistoryState extends State<History> {
   double? _deviceHeight, _deviceWidth;
-  Future<SharedPreferences>? _presFuture;
-
-  @override
-  void initState() {
-    super.initState();
-    _presFuture = SharedPreferences.getInstance();
-  }
-
-  void refreshData() {
-    setState(() {
-      _presFuture = SharedPreferences.getInstance();
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +20,7 @@ class _HistoryState extends State<History> {
 
   Widget _dataCard() {
     return FutureBuilder(
-        future: _presFuture,
+        future: SharedPreferences.getInstance(),
         builder: (BuildContext _context, AsyncSnapshot _snapshot) {
           if (_snapshot.hasData) {
             final _prefs = _snapshot.data as SharedPreferences;
