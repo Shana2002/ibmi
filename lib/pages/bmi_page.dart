@@ -14,7 +14,7 @@ class BmiPage extends StatefulWidget {
 
 class _BmiPageState extends State<BmiPage> {
   double? _deviceHeight, _deviceWidth;
-  int _age = 25, _weight = 45, _height = 70, _gender = 0;
+  int _age = 25, _weight = 160, _height = 70, _gender = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -124,6 +124,7 @@ class _BmiPageState extends State<BmiPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
+                  key: const Key("weight_minus"),
                   width: 50,
                   child: CupertinoDialogAction(
                       onPressed: () {
@@ -139,6 +140,7 @@ class _BmiPageState extends State<BmiPage> {
                       )),
                 ),
                 SizedBox(
+                  key: const Key("weight_plus"),
                   width: 50,
                   child: CupertinoDialogAction(
                       onPressed: () {
