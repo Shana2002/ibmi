@@ -1,9 +1,9 @@
-import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ibmi/utils/calculator.dart';
 import 'package:ibmi/widget/info_card.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:developer' as developer;
 
 class BmiPage extends StatefulWidget {
   const BmiPage({super.key});
@@ -25,7 +25,8 @@ class _BmiPageState extends State<BmiPage> {
       child: Container(
           height: _deviceHeight! * 0.8,
           width: _deviceWidth,
-          margin: EdgeInsets.symmetric(vertical: _deviceHeight! * 0.12),
+          margin: EdgeInsets.only(
+              top: _deviceHeight! * 0.08, bottom: _deviceHeight! * 0.03),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -68,6 +69,7 @@ class _BmiPageState extends State<BmiPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
+                  key: const Key("age_minus"),
                   width: 50,
                   child: CupertinoDialogAction(
                       onPressed: () {
@@ -83,6 +85,7 @@ class _BmiPageState extends State<BmiPage> {
                       )),
                 ),
                 SizedBox(
+                  key: const Key("age_plus"),
                   width: 50,
                   child: CupertinoDialogAction(
                       onPressed: () {
@@ -271,6 +274,9 @@ class _BmiPageState extends State<BmiPage> {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString("bmi_date", DateTime.now().toString());
     await prefs.setStringList("bmi_data", <String>[_bmi, _status]);
-    print("Result saved");
+
+    // print("Result saved");
+    String msg = "Result saved";
+    developer.log('\x1B[32m$msg\x1B[0m');
   }
 }
